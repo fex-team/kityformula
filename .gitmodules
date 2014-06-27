@@ -1,9 +1,0 @@
-[submodule "editor"]
-	path = editor
-	url = git@github.com:fex-team/kf-editor.git
-[submodule "parser"]
-	path = parser
-	url = git@github.com:fex-team/kf-parser.git
-[submodule "render"]
-	path = render
-	url = git@github.com:fex-team/kf-render.git

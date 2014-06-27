@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset='utf-8'/>
+        <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+        <meta name="description" content="Formula : HTML(SVG) Formula display solutions"/>
+
+        <title>Getting started - Kity Formula  HTML(SVG)数学公式呈现库</title>
+
+        <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/main.css">
+        <script src="javascripts/go-to-top.js"></script>
+
+    </head>
+
+    <body>
+
+        <!-- HEADER -->
+        <div id="header_wrap" class="outer">
+            <header class="inner">
+
+                <h1 id="project_title">Kity Formula</h1>
+
+                <h2 id="project_tagline">HTML(SVG)数学公式呈现库</h2>
+
+            </header>
+            <div class="nav">
+                <ul>
+                    <li><a href="/kityformula/">首页</a></li>
+                    <li class="selected"><a href="getting-started.html">Getting started</a></li>
+                    <li><a href="list.html">支持列表</a></li>
+                    <li><a href="editor.html">公式编辑器</a></li>
+                    <li><a href="latex.html">LaTeX解析器</a></li>
+                    <li ><a href="wiki-eg.html">应用示例</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div id="main_content_wrap" class="outer">
+            <section id="main_content" class="inner">
+                <h1>Getting started</h1>
+
+<p>Kity Formula（后文简称KF）是基于Kity Graphic图形库的一个数学公式呈现库， 所以在使用KF前需要引入Kity Graphic图形库资源文件。</p>
+
+<p>Kity Graphic图形库项目地址：<a href="https://github.com/kitygraph/kity">https://github.com/kitygraph/kity</a></p>
+
+<h2>初始工作</h2>
+
+<p>KF的dev版本基于<a href="https://github.com/seajs/seajs/issues/242">CMD</a>规范开发，在发布之后，通过使用build工具打包
+成非CMD版本，所以有如下两种引用资源的方式，分别对应着开发和生产两个场景：</p>
+
+<p>开发环境：</p>
+<div class="highlight"><pre><code class="html language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;title&gt;</span>资源引入demo<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
+
+    <span class="c">&lt;!-- !假定所有资源文件都在根目录下的dev-lib目录下 --&gt;</span>
+
+    <span class="c">&lt;!-- 引入Kity graphic库 --&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;/dev-lib/kitygraph.all.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+    <span class="c">&lt;!-- 引入seajs库， seajs是CMD的实现， 具体使用方式请参考http://seajs.org --&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;../dev-lib/sea-debug.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+    <span class="c">&lt;!-- 在这里就可以根据需要require不同的KF资源 --&gt;</span>
+    <span class="nt">&lt;script&gt;</span>
+
+        <span class="c1">// 设置seajs引入资源的的base path， 具体意义请参考seajs官网</span>
+        <span class="nx">seajs</span><span class="p">.</span><span class="nx">config</span><span class="p">(</span> <span class="p">{</span>
+            <span class="nx">base</span><span class="o">:</span> <span class="s2">&quot;../src&quot;</span>
+        <span class="p">}</span> <span class="p">);</span>
+
+        <span class="c1">// start模块</span>
+        <span class="nx">define</span><span class="p">(</span> <span class="s2">&quot;start&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span> <span class="nx">require</span> <span class="p">)</span> <span class="p">{</span>
+
+            <span class="c1">// 引入公式载体Formula对象， 组成公式的表达式都必须放入一个Formula的实例中才能被呈现出来</span>
+            <span class="kd">var</span> <span class="nx">Formula</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span> <span class="s2">&quot;formula&quot;</span> <span class="p">),</span>
+                <span class="c1">// 引入加法表达式对象</span>
+                <span class="nx">AdditionExpression</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span> <span class="s2">&quot;expression/compound-exp/binary-exp/addition&quot;</span> <span class="p">),</span>
+                <span class="c1">// 引入文本表达式对象</span>
+                <span class="nx">TextExpression</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span> <span class="s2">&quot;expression/text&quot;</span> <span class="p">);</span>
+
+            <span class="c1">// 创建载体对象的实例， 其参数代表一个你想要呈现公式的DOM容器</span>
+            <span class="c1">// 可以根据自己的需要使用任何dom对象， 比如div等</span>
+            <span class="kd">var</span> <span class="nx">formula</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Formula</span><span class="p">(</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span> <span class="p">),</span>
+
+                <span class="c1">// 创建一个加法表达式</span>
+                <span class="c1">// 对于所有需要文本表达式（TextExpression）对象的地方， 都可以用它的字符串表示形式来代替</span>
+                <span class="c1">// 比如这里的加法表达式， 实际上相当于：</span>
+                <span class="c1">// new AdditionExpression( new TextExpression(&quot;a&quot;), new TextExpression(&quot;b&quot;));</span>
+                <span class="nx">addExp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AdditionExpression</span><span class="p">(</span> <span class="k">new</span> <span class="nx">TextExpression</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">),</span> <span class="s2">&quot;b&quot;</span> <span class="p">);</span>
+
+            <span class="c1">// 把表达式添加到公式中呈现出来</span>
+            <span class="nx">formula</span><span class="p">.</span><span class="nx">appendExpression</span><span class="p">(</span> <span class="nx">addExp</span> <span class="p">);</span>
+
+        <span class="p">}</span> <span class="p">);</span>
+
+        <span class="c1">// 执行start模块</span>
+        <span class="nx">seajs</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span> <span class="s2">&quot;start&quot;</span> <span class="p">);</span>
+
+    <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>
+<p>生产环境：</p>
+
+<p>当前未提供生产环境使用示例</p>
+
+<h2>字符集扩展</h2>
+
+<p>KF内置了一套<a href="demo/base">基本字符集</a>和<a href="asdf">希腊字符集</a>。</p>
+
+<p>要构建一个文本表达式（TextExpression）必须且只能使用已提供的字符集里的字符。对于一般的场景，
+KF提供的字符集已经能够满足需求，但如果需要使用已提供字符集之外的字符，则你可以扩展该字符集以满足需求。</p>
+
+<p>下面以创建一个希腊字符“α”（alpha）为例， 讲解如何扩展KF的字符集。</p>
+
+<ol>
+<li><p><strong>创建字符数据文件</strong></p>
+
+<p>在KF里面， 一切图形都是通过path绘制出来的，字符也不例外。所以，要创建一个字符，需要提供该字符的path数据。
+每个字符都有一个字符边框，用以控制该字符实际占用的空间的大小，同时该字符边框也决定了和其他字符排列在一起时的相对位置。
+有了path数据和字符边框之后，你还需要定义好字符在边框中的偏移，以使字符处于边框中的合适位置。总结来说，
+提供的字符数据文件应该包含： path（字符数据）、box（字符边框）、offset（偏移量）这三个数据。</p>
+
+<p>&quot;α&quot;字符数据文件：</p>
+<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="cm">/*!</span>
+<span class="cm"> * File: src/char/greek/alpha.js</span>
+<span class="cm"> */</span>
+
+<span class="c1">// CMD格式模块定义</span>
+<span class="nx">define</span><span class="p">(</span> <span class="p">{</span>
+
+    <span class="c1">// path数据，该数据描述了如何去绘制一个“α”字符</span>
+    <span class="c1">// **这里的path仅仅是一个示例，实际的path比这里的长**</span>
+    <span class="nx">path</span><span class="o">:</span> <span class="s2">&quot;M31.395,19.297c3.384-4.248,5.76-9.721Z&quot;</span><span class="p">,</span>
+
+    <span class="c1">// 字符在字符边框内的偏移</span>
+    <span class="c1">// 当前的值表示， 字符在边框内水平方向上偏移0个单位，在竖直方向上偏移32个单位</span>
+    <span class="nx">offset</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">y</span><span class="o">:</span> <span class="mi">32</span>
+    <span class="p">},</span>
+
+    <span class="c1">// 字符边框的大小， 字符边框的起始位置应该始终是从( 0, 0 )坐标开始</span>
+    <span class="nx">box</span><span class="o">:</span> <span class="s2">&quot;M 0 0 L 43 0 L 43 86 L 0 86 Z&quot;</span>
+
+<span class="p">}</span> <span class="p">);</span>
+</code></pre></div></li>
+<li><p><strong>定义数据映射项</strong></p>
+
+<p>创建了数据文件之后，需要把字符和该数据文件关联起来，KF通过使用映射文件来创建这种关联关系。</p>
+
+<p>映射文件实际上是一个JS的普通对象（PlainObject），其Key表示要映射的字符，Value是该字符所对应的数据文件。
+需要注意的是，Key必须是<strong>单个字符</strong>。在这个示例里，不能通过键盘方便地输入字符“α”，
+这就会造成在构建文本表达式的时候输入上会有障碍，KF为解决这种情况提供了一个<em>字符别名</em>的机制，
+允许你通过有意义的别名来代表一个特殊的字符。</p>
+
+<p><strong>字符别名是以一个“\”开始，并以一个“\”结尾，其间可以包含任意个非“\”字符字符序列</strong>。</p>
+
+<p>以下是字符“α”的映射项：</p>
+<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="cm">/*!</span>
+<span class="cm"> * File: src/char/data.js</span>
+<span class="cm"> */</span>
+<span class="nx">define</span><span class="p">(</span> <span class="kd">function</span> <span class="p">(</span> <span class="nx">require</span><span class="p">,</span> <span class="nx">exports</span><span class="p">,</span> <span class="nx">module</span> <span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+
+        <span class="c1">// 省略了其他字符的映射关系</span>
+        <span class="p">...</span>
+
+        <span class="c1">// u03B1 是“α”的unicode编码</span>
+        <span class="c1">// 这里直接把字符映射到数据文件是必要的</span>
+        <span class="c1">// 这能使用户直接输入“α”字符时也能找到正确的数据文件</span>
+        <span class="s2">&quot;\u03B1&quot;</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span> <span class="s2">&quot;char/data/greek/alpha&quot;</span> <span class="p">),</span>
+
+        <span class="c1">// “α”的字符别名</span>
+        <span class="s2">&quot;\\alpha\\&quot;</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span> <span class="s2">&quot;char/data/greek/alpha&quot;</span> <span class="p">),</span>
+        <span class="p">...</span>
+
+    <span class="p">};</span>
+
+<span class="p">}</span> <span class="p">);</span>
+</code></pre></div></li>
+<li><p><strong>使用新扩展的字符</strong></p>
+
+<p>创建好字符之后就可以在TextExpression（文本表达式）中使用该字符了。</p>
+<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="cm">/*!</span>
+<span class="cm"> * 使用示例文件，</span>
+<span class="cm"> */</span>
+<span class="nx">define</span><span class="p">(</span> <span class="kd">function</span> <span class="p">(</span> <span class="nx">require</span><span class="p">,</span> <span class="nx">exports</span><span class="p">,</span> <span class="nx">module</span> <span class="p">)</span> <span class="p">{</span>
+
+    <span class="c1">// 引入所需对象</span>
+    <span class="c1">// 无须直接处理字符对象， 仅仅只需要有TextExpression对象就足够了</span>
+
+    <span class="kd">var</span> <span class="nx">Formula</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span> <span class="s2">&quot;formula&quot;</span> <span class="p">),</span>
+        <span class="nx">TextExpression</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span> <span class="s2">&quot;expression/text&quot;</span> <span class="p">);</span>
+
+    <span class="c1">// 以body为容器创建一个公式</span>
+    <span class="kd">var</span> <span class="nx">formula</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Formula</span><span class="p">(</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span> <span class="p">);</span>
+
+    <span class="c1">// 向公式中添加一个文本表达式，该文本表达式使用了我们刚刚创建的“α”字符</span>
+    <span class="c1">// 在创建文本表达式时， 直接传递了字符“α”</span>
+    <span class="c1">// 也可以用另一种更简单更易输入的方式来创建</span>
+    <span class="c1">//      new TextExpression( &quot;\\alpha\\&quot; );</span>
+
+    <span class="nx">formula</span><span class="p">.</span><span class="nx">appendExpression</span><span class="p">(</span> <span class="k">new</span> <span class="nx">TextExpression</span><span class="p">(</span> <span class="s2">&quot;α&quot;</span> <span class="p">)</span> <span class="p">);</span>
+
+<span class="p">}</span> <span class="p">);</span>
+</code></pre></div></li>
+</ol>
+
+<p>以上就是创建一个字符的完整过程，在实际应用中，可以定义任何字符，需要注意的是：
+<strong>字符只能用于文本表达式中，而不能出现在其类型的表达式中</strong>。</p>
+
+<h2>表达式扩展</h2>
+
+<p>KF提供了大部分常用的表达式，如：加、减、乘、除、方根、幂、求和、积分、上下标等表达式，
+但如果你所需的表达式KF并没有提供，你可以通过简单的步骤来扩展表达式集，帮助KF为你绘制出正确的表达式。</p>
+
+<p>下面以加法表达式来说明创建一类表达式所需的步骤。</p>
+
+<ol>
+<li><p><strong>创建操作符</strong></p>
+
+<p>在KF里，除了文本表达式（TextExpression），其他所有的表达式都对应着一个操作符，
+比如加法表达式（AdditionExpression）就对应着一个加法操作符（AdditionOperator）。</p>
+
+<p>所以，我们需要先创建一个加法操作符。</p>
+<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="cm">/*!</span>
+<span class="cm"> * File: src/operator/binary-opr/addition.js</span>
+<span class="cm"> */</span>
+<span class="nx">define</span><span class="p">(</span> <span class="kd">function</span> <span class="p">(</span> <span class="nx">require</span><span class="p">,</span> <span class="nx">exports</span><span class="p">,</span> <span class="nx">modules</span> <span class="p">)</span> <span class="p">{</span>
+
+    <span class="kd">var</span> <span class="nx">kity</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span> <span class="s2">&quot;kity&quot;</span> <span class="p">);</span>
+
+    <span class="c1">// kity.createClass 方法是Kity Graphic库里的方法， 用于创建一个类</span>
+    <span class="c1">// 具体的使用方法请查看Kity Graphic官方文档</span>
+
+    <span class="k">return</span> <span class="nx">kity</span><span class="p">.</span><span class="nx">createClass</span><span class="p">(</span> <span class="s1">&#39;AdditionOperator&#39;</span><span class="p">,</span> <span class="p">{</span>
+
+        <span class="c1">// 所有的操作符都继承于基类Operator</span>
+        <span class="nx">base</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span> <span class="s2">&quot;operator/operator&quot;</span> <span class="p">),</span>
+
+        <span class="c1">// 构造函数</span>
+        <span class="nx">constructor</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">callBase</span><span class="p">(</span> <span class="s2">&quot;Addition&quot;</span> <span class="p">);</span>
+
+            <span class="c1">// 绘制符号图形</span>
+            <span class="c1">// 如果一个操作符没有显示的操作符号， 则可以什么也不画</span>
+            <span class="c1">// addOperatorShape() 会把绘制出来的矩形添加到该表达式的画布中</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">addOperatorShape</span><span class="p">(</span> <span class="k">new</span> <span class="nx">kity</span><span class="p">.</span><span class="nx">Rect</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span> <span class="p">).</span><span class="nx">fill</span><span class="p">(</span> <span class="s2">&quot;black&quot;</span> <span class="p">)</span> <span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">addOperatorShape</span><span class="p">(</span> <span class="k">new</span> <span class="nx">kity</span><span class="p">.</span><span class="nx">Rect</span><span class="p">(</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">3</span> <span class="p">).</span><span class="nx">fill</span><span class="p">(</span> <span class="s2">&quot;black&quot;</span> <span class="p">)</span> <span class="p">);</span>
+
+            <span class="c1">// 设置操作符的边框大小， 根据操作符的不同这里设置不同的值</span>
+            <span class="c1">// 默认为 width： 0, height： 0</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">setBoxSize</span><span class="p">(</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">43</span> <span class="p">);</span>
+
+        <span class="p">},</span>
+
+        <span class="c1">// 当该操作符所属的表达式被添加到Formula对象上时， 将会调用该方法</span>
+        <span class="c1">// applyOperand接受的参数是来自于其对应的表达式的操作数</span>
+        <span class="c1">// 该方法的详细说明在后文中会提到</span>
+        <span class="nx">applyOperand</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span> <span class="nx">operand</span><span class="p">...</span> <span class="cm">/*操作数列表*/</span> <span class="p">)</span> <span class="p">{</span>
+
+            <span class="cm">/* 在这里处理操作数和操作符之间的偏移和大小等工作 */</span>
+            <span class="cm">/* 对于加法操作符，当前只需要调整操作数和操作符的偏移位置即可 */</span>
+
+        <span class="p">}</span>
+
+    <span class="p">}</span> <span class="p">);</span>
+
+<span class="p">}</span> <span class="p">);</span>
+</code></pre></div>
+<p>上面的文件示例创建了加法操作符，特别需要注意的是，如果你将要创建的表达式没有显示的操作符，
+你也应该有一个操作符对象，并且该操作符对象至少要具有以上所示的结构，
+那怕这些构造函数和方法什么都不做。</p></li>
+<li><p><strong>创建表达式</strong></p>
+
+<p>有了操作符以后，我们需要创建一个表达式。<strong>表达式</strong>才是提供给使用者直接使用的接口。</p>
+<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="cm">/*!</span>
+<span class="cm"> * File: src/expression/compound-exp/binary-exp/addition.js</span>
+<span class="cm"> * 加法表达式</span>
+<span class="cm"> */</span>
+<span class="nx">define</span><span class="p">(</span> <span class="kd">function</span> <span class="p">(</span> <span class="nx">require</span><span class="p">,</span> <span class="nx">exports</span><span class="p">,</span> <span class="nx">modules</span> <span class="p">)</span> <span class="p">{</span>
+
+    <span class="kd">var</span> <span class="nx">kity</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span> <span class="s2">&quot;kity&quot;</span> <span class="p">),</span>
+        <span class="c1">// 引入加法操作符对象， 加法表达式包含了加法操作符</span>
+        <span class="nx">AdditionOperator</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span> <span class="s2">&quot;operator/binary-opr/addition&quot;</span> <span class="p">);</span>
+
+    <span class="k">return</span> <span class="nx">kity</span><span class="p">.</span><span class="nx">createClass</span><span class="p">(</span> <span class="s1">&#39;AdditionExpression&#39;</span><span class="p">,</span> <span class="p">{</span>
+
+        <span class="c1">// 所有的表达式都直接或间接继承于复合表达式（CompoundExpression）</span>
+        <span class="nx">base</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span> <span class="s2">&quot;expression/compound&quot;</span> <span class="p">),</span>
+
+        <span class="nx">constructor</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span> <span class="nx">firstOperand</span><span class="p">,</span> <span class="nx">lastOperand</span> <span class="p">)</span> <span class="p">{</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">callBase</span><span class="p">();</span>
+
+            <span class="c1">// 根据参数设置不同的操作数</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">setFirstOperand</span><span class="p">(</span> <span class="nx">firstOperand</span> <span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">setLastOperand</span><span class="p">(</span> <span class="nx">lastOperand</span> <span class="p">);</span>
+
+            <span class="c1">// 由于是加法表达式， 所以要求在构造表达式的时候就要存在操作符对象</span>
+            <span class="c1">// 如果不这么做， 那么用户在表达式被添加到Formula对象中前，</span>
+            <span class="c1">// 需要手动调用setOperator()设置操作符</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">setOperator</span><span class="p">(</span> <span class="k">new</span> <span class="nx">AdditionOperator</span><span class="p">()</span> <span class="p">);</span>
+
+        <span class="p">},</span>
+
+        <span class="cm">/* 一系列自定义方法， 用于根据操作符的不同，设置不同的操作数 */</span>
+
+        <span class="nx">setFirstOperand</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span> <span class="nx">operand</span> <span class="p">)</span> <span class="p">{</span>
+
+            <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">setOperand</span><span class="p">(</span> <span class="nx">operand</span><span class="p">,</span> <span class="mi">0</span> <span class="p">);</span>
+
+        <span class="p">},</span>
+
+        <span class="nx">getFirstOperand</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+
+            <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">getOperand</span><span class="p">(</span> <span class="mi">0</span> <span class="p">);</span>
+
+        <span class="p">},</span>
+
+        <span class="nx">setLastOperand</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span> <span class="nx">operand</span> <span class="p">)</span> <span class="p">{</span>
+
+            <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">setOperand</span><span class="p">(</span> <span class="nx">operand</span><span class="p">,</span> <span class="mi">1</span> <span class="p">);</span>
+
+        <span class="p">},</span>
+
+        <span class="nx">getLastOperand</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+
+            <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">getOperand</span><span class="p">(</span> <span class="mi">1</span> <span class="p">);</span>
+
+        <span class="p">}</span>
+
+    <span class="p">}</span> <span class="p">);</span>
+
+<span class="p">}</span> <span class="p">);</span>
+</code></pre></div></li>
+<li><p><strong>applyOperand的参数</strong></p>
+
+<p>在成功创建表达式和操作符之后，需要再说明一下applyOperand()的参数问题。</p>
+
+<p>以上面刚创建的加法表达式为例，以下代码：</p>
+<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="cm">/* 省略了其他代码 */</span>
+<span class="k">new</span> <span class="nx">AdditionExpression</span><span class="p">(</span> <span class="k">new</span> <span class="nx">TextExpression</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">),</span> <span class="k">new</span> <span class="nx">TextExpression</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">)</span> <span class="p">);</span>
+</code></pre></div>
+<p>创建了一个以“a”为前操作数，以“b”为后操作数的加法表达式，从表达式的构造函数中我们可以看出，
+构造函数分别调用了setFirstOperand()和setLastOperand()方法存储这两个操作数。
+而setFirstOperand()和setLastOperand()方法分别调用了其父类的setOperand()方法，
+这些操作的结果就是把用户传递的两个文本表达式“a”和“b”按一定的顺序存储了起来。
+当用户把一个表达式添加到Formula对象中时，就会<strong>递归地调用</strong>该表达式及其所包含的所有<strong>子表达式</strong>的applyOperand方法，
+同时，在调用applyOperand方法时， 会把之前存储的操作数作为参数<strong>依次</strong>传递过去。
+在这个示例里，即applyOperand()方法调用时，接受到的参数就是用户在构造函数中传递的两个文本表达式的引用。</p>
+
+<p>而applyOperand方法的职责就是在被调用时，根据操作符的要求去排列、调整传递进来的操作数，
+甚至在此时才去绘制操作符，而不是在操作符构造函数中去绘制，
+这种方法对于某些需要根据操作数的不同而具有不同大小和外观的操作符来说是唯一的方案。比如： 方根和分数操作符。</p></li>
+</ol>
+
+<h2>其他相关资源</h2>
+
+<p>更多的资源可以参考源代码目录中的examples目录下的示例。</p>
+
+            </section>
+            <div id="goToTop" class="go-to-top"><a href="#"></a></div>
+        </div>
+
+        <!-- FOOTER  -->
+        <div id="footer_wrap" class="outer footer-warp">
+            <div class="bottom-info-box"></div>
+            <footer class="inner copyright-box">
+                <p class="copyright">&copy;2013 <a href="http://www.baidu.com/">Baidu</a><span class="team-box">FEX Team</span><a href="http://ueditor.baidu.com/">Kity Group</a>
+                </p>
+            </footer>
+        </div>
+
+
+    </body>
+</html>

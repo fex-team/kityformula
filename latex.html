@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+    <meta name="description" content="Formula : HTML(SVG) Formula display solutions"/>
+
+    <title>表达式列表 - Kity Formula HTML(SVG)数学公式呈现库</title>
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/main.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/notice.css">
+    <style type="text/css">
+
+        html, body {
+            overflow-y: visible;
+        }
+
+        .latex-input-wrap .latex-input {
+            resize: none;
+            width: 100%;
+            height: 100px;
+            line-height: 1.5;
+            padding: 5px;
+            border: 1px solid #b3b3b3;
+        }
+
+        .latex-view-wrap {
+            margin-bottom: 50px;
+        }
+
+        .latex-input-wrap em {
+            display: block;
+            clear: both;
+        }
+
+        .latex-input-wrap .error-tip {
+            height: 20px;
+            line-height: 20px;
+            color: red;
+            font-size: 12px;
+            font-style: normal;
+            float: left;
+        }
+
+        .latex-input-wrap .default-latex-btn {
+            float: right;
+            padding: 5px 10px;
+        }
+
+        .parse-btn {
+            padding: 10px 30px;
+            margin: 40px 0;
+        }
+
+        .formula-container {
+            height: 300px;
+            padding: 20px 20px;
+            border: 1px solid #b3b3b3;
+        }
+
+        .formula-declaration {
+            margin-bottom: 80px;
+        }
+
+        .formula-notice ol {
+            margin: 15px;
+        }
+
+
+        /* 预设latex选择器 */
+        .default-latex-box {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: none;
+            background: rgba( 0, 0, 0, 0.5 );
+        }
+
+        .default-latex-box .box-container {
+
+            width: 800px;
+            height: 500px;
+            background: #f2f2f2;
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -250px;
+            margin-left: -400px;
+            border: 1px solid white;
+            box-shadow: inset 0 0 5px rgba( 255, 255, 0, 0.5 ), 0 0 10px rgba( 0, 0, 0, 0.5 );
+
+        }
+
+        .default-latex-box .box-caption {
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            background: black;
+        }
+
+        .default-latex-box .box-caption h1 {
+            padding: 0 0 0 10px;
+            margin: 0;
+            font-size: 1em;
+            color: rgb(255, 224, 0);
+            font-weight: normal;
+        }
+
+        .default-latex-box .close-box-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 30px;
+            width: 50px;
+            height: 50px;
+            z-index: 9999;
+        }
+
+        .default-latex-box .box-content {
+            width: 100%;
+            height: 440px;
+            margin: 5px 0;
+            overflow: hidden;
+        }
+
+        .default-latex-box .box-content li {
+            line-height: 3;
+            font-size: 16px;
+        }
+
+        .default-latex-box .box-inner-content {
+            border: 1px solid #f2f2f2;
+            padding: 10px;
+            height: 400px;
+            overflow-y: auto;
+        }
+
+        .mathquill-rendered-math span{
+            line-height: 1;
+        }
+
+        .box-inner-content ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .box-inner-content ul li {
+            padding: 0 20px;
+            border-bottom: 1px solid #ECECEC;
+            cursor: pointer;
+        }
+
+        .box-inner-content ul li:HOVER {
+            background-color: #fcfcfc;
+        }
+
+    </style>
+    <script src="javascripts/go-to-top.js"></script>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div id="header_wrap" class="outer">
+    <header class="inner">
+
+        <h1 id="project_title">Kity Formula</h1>
+
+        <h2 id="project_tagline">HTML(SVG)数学公式呈现库</h2>
+
+    </header>
+    <div class="nav">
+        <ul>
+            <li><a href="/kityformula/">首页</a></li>
+            <li><a href="getting-started.html">Getting started</a></li>
+            <li><a href="list.html">支持列表</a></li>
+            <li><a href="editor.html">公式编辑器</a></li>
+            <li class="selected"><a href="latex.html">LaTeX解析器</a></li>
+            <li><a href="wiki-eg.html">应用示例</a></li>
+        </ul>
+    </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="main_content_wrap" class="outer">
+    <section id="main_content" class="inner">
+        <!-- 公式资源 -->
+        <link rel="stylesheet" href="./lib/mathquill/mathquill.css"/>
+        <script src="lib/kitygraph.all.min.js"></script>
+        <script src="lib/kity-formula.all.min.js"></script>
+        <script src="lib/sea-debug.js"></script>
+        <script src="./lib/jquery-1.6.2.min.js"></script>
+        <script src="./lib/mathquill/mathquill.min.js"></script>
+        <script src="javascripts/latex-parser-setup.js"></script>
+        <link rel="stylesheet" href="./stylesheets/um-formula.css"/>
+        <script src="./javascripts/um-formula.js"></script>
+
+        <!-- 可视化编辑 -->
+        <div class="formula-declaration">
+            <div class="formula-notice">
+                <h1>Latex 解析器使用说明：</h1>
+                <ol>
+                    <li>在“LaTeX表达式”文本框中输入LaTeX语法的表达式，你也可以通过点击输入框右下角的“选取预设表达式”按钮选取LaTeX表达式， 也可以通过“公式可视化编辑”进行可视化编辑。</li>
+                    <li>在你输入符合LaTeX语法的公式后，Kity Formula会自动在“公式渲染结果”里绘制出公式。</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="latex-input-wrap">
+            <label for="latexInput">LaTeX表达式：</label>
+            <textarea id="latexInput" class="latex-input" placeholder="请输入LaTeX表达式"></textarea>
+            <em id="errorTip" class="error-tip"></em>
+            <button id="defaultLatexBtn" type="button" class="default-latex-btn">选取预设表达式</button>
+            <em></em>
+        </div>
+
+        <div class="latex-view-wrap latex-input-wrap">
+            <label for="latexView">公式可视化编辑：</label>
+            <button type="button" class="formula-pupop-btn">插入公式</button>
+            <div id="latexView" class="latex-input"></div>
+        </div>
+
+        <div class="latex-render-result">
+            <span>公式渲染结果：</span>
+            <div id="formulaContainer" class="formula-container"></div>
+        </div>
+
+    </section>
+    <div id="goToTop" class="go-to-top"><a href="#"></a></div>
+</div>
+
+<div id="defaultLatexBox" class="default-latex-box">
+    <div class="box-container">
+        <div class="box-caption">
+            <h1>预设Latex表达式</h1>
+            <button id="defaultLatexBoxCloseBtn" class="close-box-btn">X</button>
+        </div>
+        <div class="box-content">
+            <div class="box-inner-content">
+                <ul>
+                    <li>a+b-c \div d \times e</li>
+                    <li>e = \lim_{n\to\infty} {\left(1+\frac{1}{n}\right)}</li>
+                    <li>\sum_{i=0}^{n-1} f(t_i) (x_{i+1}-x_i)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer footer-warp">
+    <div class="bottom-info-box"></div>
+    <footer class="inner copyright-box">
+        <p class="copyright">&copy;2013 <a href="http://www.baidu.com/">Baidu</a><span
+                class="team-box">FEX Team</span><a href="http://ueditor.baidu.com/">Kity Group</a>
+        </p>
+    </footer>
+</div>
+
+</body>
+</html>

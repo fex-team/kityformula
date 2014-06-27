@@ -1,0 +1,56 @@
+@import url('reset.css');
+
+/* General Demo Style */
+body{
+	background:#e4ebe9 url(../images/pattern.png) repeat top left;
+	color:#000;
+	font-family: 'PT Sans Narrow', Arial, sans-serif;
+	font-size:12px;
+}
+a{
+	color:#000;
+	text-decoration:none;
+}
+.clr{
+	clear:both;
+}
+h1, h5{
+	margin:15px;
+	font-size:44px;
+	color:#000;
+	font-family: 'Rochester', sans-serif;
+	text-shadow:1px 1px 1px #fff;
+	text-align:center;
+}
+h1 span, h5{
+	font-size:20px;
+	display:block;
+	color:#60817a;
+}
+/* Header Style */
+.header{
+	height:25px;
+	line-height:24px;
+	font-size:13px;
+	background:#000;
+	opacity:0.9;
+	text-transform:uppercase;
+	z-index:4;
+}
+.header a{
+	padding:5px 10px;
+	letter-spacing:1px;
+	text-shadow:1px 1px 1px #000;
+	color:#ddd;
+	text-align:right;
+}
+.header a:hover{
+	color:#fff;
+}
+.header a span{
+	font-weight:bold;
+}
+.header span.right_ab{
+	position:absolute;
+	right:4px;
+}

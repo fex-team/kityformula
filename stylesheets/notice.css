@@ -1,0 +1,19 @@
+.formula-declaration {
+    background: #f2f2f2;
+    padding: 20px;
+}
+
+.formula-declaration .formula-notice {
+    width: 800px;
+    margin: 0 auto;
+    padding: 10px;
+    border: 1px solid #E9E9E9;
+    box-shadow: 5px 5px 10px rgba( 0, 0, 0, 0.4 );
+    background: #FFA012;
+}
+
+.formula-notice h1 {
+    font-size: 1em;
+    padding: 0;
+    margin: 0;
+}

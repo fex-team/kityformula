@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+    <meta name="description" content="Formula : HTML(SVG) Formula display solutions"/>
+
+    <title>应用示例 - Kity Formula  HTML(SVG)数学公式呈现库</title>
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/main.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/notice.css">
+
+    <style type="text/css">
+        .eg-btn-selected {
+            font-weight: bold;
+            color: #3285ff;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div id="header_wrap" class="outer">
+    <header class="inner">
+
+        <h1 id="project_title">Kity Formula</h1>
+
+        <h2 id="project_tagline">HTML(SVG)数学公式呈现库</h2>
+
+    </header>
+    <div class="nav">
+        <ul>
+            <li><a href="/kityformula/">首页</a></li>
+            <li ><a href="getting-started.html">Getting started</a></li>
+            <li><a href="list.html">支持列表</a></li>
+            <li><a href="editor.html">公式编辑器</a></li>
+            <li><a href="latex.html">LaTeX解析器</a></li>
+            <li class="selected"><a href="wiki-eg.html">应用示例</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="formula-declaration">
+    <div class="formula-notice">
+        <h1>Kity Formula 应用示例</h1>
+        <p id="noticeContent">
+            申明：本页面内容来自百度百科 —— <a href="http://baike.baidu.com/subview/61339/5928878.htm" target="_blank">http://baike.baidu.com/subview/61339/5928878.htm</a>，
+            本示例仅把原有页面内容中的公式图片替换为Kity Formula，如果您对页面内容感兴趣，请前往百度百科官网阅读更多内容。
+        </p>
+    </div>
+</div>
+
+<div style="margin: 20px 0;">
+    <button id="baikeChangeBtn" type="button"  class="eg-btn-selected" style="padding: 10px 20px;" onclick="changeEg( 'baike' )">百度百科示例</button>
+    <button id="wikiChangeBtn" type="button" style="padding: 10px 20px;" onclick="changeEg( 'wiki' )">维基百科示例</button>
+    <span style="color: #FFA012; font-weight: bold;">←点击按钮切换示例页面</span>
+</div>
+<script>
+    function changeEg ( type ) {
+
+        var url = {
+                    baike: 'baike-example.html',
+                    wiki: 'wiki-example.html'
+                },
+                notice = {
+                    baike: '申明：本页面内容来自百度百科 —— <a href="http://baike.baidu.com/subview/61339/5928878.htm" target="_blank">http://baike.baidu.com/subview/61339/5928878.htm</a>，本示例仅把原有页面内容中的公式图片替换为Kity Formula，如果您对页面内容感兴趣，请前往百度百科官网阅读更多内容。',
+                    wiki: '申明：本页面内容来自维基百科 —— <a href="http://zh.wikipedia.org/wiki/%E7%A7%AF%E5%88%86" target="_blank">http://zh.wikipedia.org/wiki/积分</a>，本示例仅把原有页面内容中的公式图片替换为Kity Formula，如果您对页面内容感兴趣，请前往维基百科官网阅读更多内容。'
+                },
+                btn = {
+                    baike: document.getElementById( "baikeChangeBtn" ),
+                    wiki: document.getElementById( "wikiChangeBtn" )
+                };
+
+        document.getElementById( "egFrame" ).src = url[ type ];
+        document.getElementById( "noticeContent" ).innerHTML = notice[ type ];
+
+        btn[ type ].className = "eg-btn-selected";
+        btn[ type === 'wiki' ? 'baike' : 'wiki' ].className = "";
+
+    }
+</script>
+<iframe id="egFrame" frameborder="no" src="baike-example.html" style="background: white;" width="100%" height="10000"></iframe>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer footer-warp">
+    <div class="bottom-info-box"></div>
+    <footer class="inner copyright-box">
+        <p class="copyright">&copy;2013 <a href="http://www.baidu.com/">Baidu</a><span class="team-box">FEX Team</span><a href="http://ueditor.baidu.com/">Kity Group</a>
+        </p>
+    </footer>
+</div>
+
+
+</body>
+</html>

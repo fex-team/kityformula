@@ -1,0 +1,62 @@
+/*!
+ * list页面样式表
+ */
+
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+}
+
+table td {
+    height: 50px;
+    vertical-align: top;
+}
+
+.title-cell {
+    width: 180px;
+}
+
+.title-cell-last {
+    height: 700px;
+}
+
+table td div {
+    height: 100%;
+    line-height: 50px;
+}
+
+h2 em {
+    font-size: 12px;
+    padding-left: 2em;
+    font-weight: normal;
+}
+
+h2 .note {
+    color: red;
+}
+
+.demo-container {
+    min-height: 1500px;
+}
+
+.demo-container .base-charset-container {
+    height: 150px;
+}
+
+.demo-container .roman-charset-container {
+    height: 150px;
+}
+
+.demo-container .greek-charset-container {
+    height: 150px;
+}
+
+.demo-container .symbol-container {
+    height: 100px;
+}
+
+.box p {
+    color: #aaa;
+}

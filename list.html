@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+    <meta name="description" content="Formula : HTML(SVG) Formula display solutions"/>
+
+    <title>支持列表 - Kity Formula HTML(SVG)数学公式呈现库</title>
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/main.css">
+    <script src="javascripts/go-to-top.js"></script>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div id="header_wrap" class="outer">
+    <header class="inner">
+
+        <h1 id="project_title">Kity Formula</h1>
+
+        <h2 id="project_tagline">HTML(SVG)数学公式呈现库</h2>
+    </header>
+    <div class="nav">
+        <ul>
+            <li><a href="/kityformula/">首页</a></li>
+            <li><a href="getting-started.html">Getting started</a></li>
+            <li class="selected"><a href="list.html">支持列表</a></li>
+            <li><a href="editor.html">公式编辑器</a></li>
+            <li><a href="latex.html">LaTeX解析器</a></li>
+            <li><a href="wiki-eg.html">应用示例</a></li>
+        </ul>
+    </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="main_content_wrap" class="outer">
+    <section id="main_content" class="inner">
+        <link rel="stylesheet" href="stylesheets/list.css">
+        <script src="lib/kitygraph.all.min.js"></script>
+        <script src="lib/kity-formula.all.min.js"></script>
+        <script src="lib/sea-debug.js"></script>
+        <script src="javascripts/list.js"></script>
+        <script src="javascripts/start.js"></script>
+
+        <div>
+            <p>
+                Kity Formula当前支持的所有表达式一览表
+            </p>
+        </div>
+        <div class="demo-container">
+            <h2>基本字符集<em>（可由键盘直接输入字符）</em></h2>
+
+            <div class="box">
+                <p>
+                    默认文本， 构造类： kf.TextExpression( char );
+                </p>
+                <div id="baseCharset" class="base-charset-container"></div>
+            </div>
+
+            <h2>罗马字符集<em>（可由键盘直接输入字符）</em></h2>
+
+            <div class="box">
+                <p>
+                    罗马字体文本， 构造类： kf.RomanTextExpression( char );
+                </p>
+                <div id="romanCharset" class="roman-charset-container"></div>
+            </div>
+
+            <h2>希腊字符集<em class="note">（需要通过转义代码输入字符）</em></h2>
+
+            <div class="box">
+                <p>
+                    希腊文本， 构造类： kf.TextExpression( charCode );
+                </p>
+                <div id="greekCharset" class="greek-charset-container"></div>
+            </div>
+
+            <h2>符号集</h2>
+
+            <div class="box">
+                <p>
+                    符号， 构造类： kf.TextExpression( symbolCode );
+                </p>
+                <div id="symbol" class="symbol-container"></div>
+            </div>
+
+            <h2>常用表达式列表</h2>
+
+            <div id="commonExpressionsContainer"></div>
+
+            <h2>关系表达式 —— 比较操作符</h2>
+
+            <div class="box">
+                <div id="compare" class="compare-container"></div>
+            </div>
+
+            <h2>关系表达式 —— 集合操作符</h2>
+
+            <div class="box">
+                <div id="set" class="set-container"></div>
+            </div>
+
+            <h2>关系表达式 —— 逻辑操作符</h2>
+
+            <div class="box">
+                <div id="logical" class="logical-container"></div>
+            </div>
+
+            <h2>关系表达式 —— 否定操作符</h2>
+
+            <div class="box">
+                <div id="notExp" class="notExp-container"></div>
+            </div>
+
+            <h2>复合公式示例</h2>
+
+            <div id="complex"></div>
+        </div>
+
+    </section>
+    <div id="goToTop" class="go-to-top"><a href="#"></a></div>
+</div>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer footer-warp">
+    <div class="bottom-info-box"></div>
+    <footer class="inner copyright-box">
+        <p class="copyright">&copy;2013 <a href="http://www.baidu.com/">Baidu</a><span
+                class="team-box">FEX Team</span><a href="http://ueditor.baidu.com/">Kity Group</a>
+        </p>
+    </footer>
+</div>
+
+
+</body>
+</html>

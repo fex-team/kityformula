@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mathquill Compare</title>
+    <script src="./lib/jquery-1.6.2.min.js"></script>
+    <script src="./lib/mathquill/mathquill.min.js"></script>
+    <link rel="stylesheet" href="./lib/mathquill/mathquill.css"/>
+    <style>
+        .formula{
+            width: 500px;
+            height: 150px;
+            border-radius: 4px;
+            border: 1px solid #cccccc;
+            margin-bottom: 10px;
+            padding: 2px;
+        }
+    </style>
+</head>
+<body>
+    <h1>compare kityformula and mathquill</h1>
+    <div>
+        <h2>LaTeX源码编辑</h2>
+        <textarea name="LaTeXcode" id="LaTeXcode" class="formula"></textarea>
+    </div>
+    <div>
+        <h2>mathquill编辑</h2>
+        <div id="mathquill" class="formula"></div>
+    </div>
+    <div>
+        <h2>kity formula显示</h2>
+        <div id="kityformula" class="formula"></div>
+    </div>
+
+    <script>
+        var $LaTeXcode = $('#LaTeXcode'),
+            $mathquill = $('#mathquill').mathquill('editable');
+
+        $mathquill.mathquill('LaTeX', "a+b");
+
+        /* 设置LaTeX源码框内容 */
+        function setLaTeXcode(LaTeX){
+            $LaTeXcode.val(LaTeX);
+        }
+        /* 设置mathquill内容 */
+        function setMathquill(LaTeX){
+            $mathquill.mathquill('LaTeX', LaTeX);
+        }
+        function setKityFormula(LaTeX){
+
+        }
+
+        /* 监听LaTeX源码框内容改变 */
+        $LaTeXcode.keyup(function(){
+            var LaTeX = $LaTeXcode.val();
+            setMathquill(LaTeX);
+            setKityFormula(LaTeX);
+        });
+        /* 监听mathquill内容改变 */
+        $mathquill.keyup(function(){
+            var LaTeX = $mathquill.mathquill('LaTeX');
+            setLaTeXcode(LaTeX);
+            setKityFormula(LaTeX);
+        });
+
+        /* 初始化 */
+        $LaTeXcode.val('\\frac{x}{y}');
+        $LaTeXcode.trigger('keyup');
+    </script>
+
+</body>
+</html>

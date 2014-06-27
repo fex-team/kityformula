@@ -1,0 +1,112 @@
+.nav {
+    border-top: 1px solid #000000;
+    box-shadow: 0 1px 0px rgba(255, 255, 255, 0.1), inset 0 1px 0px rgba(255, 255, 255, 0.1);
+}
+
+.nav ul {
+    width: 1000px;
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+}
+
+.nav ul li {
+    min-width: 80px;
+    height: 50px;
+    display: inline-block;
+    line-height: 50px;
+}
+
+.nav ul .selected {
+    background-color: #3d3d3d;
+}
+
+.nav ul li:HOVER {
+    background-color: #3d3d3d;
+}
+
+.nav ul a {
+    display: block;
+    padding: 0 20px;
+    color: #bdbdbd;
+}
+
+.nav ul a:HOVER {
+    text-decoration: none;
+    color: #fff;
+}
+
+.nav .selected a {
+    color: #007edf;
+}
+
+.nav .selected a:HOVER {
+    color: #007edf;
+}
+
+#main_content .feature {
+    float: left;
+    width: 100%;
+    margin-bottom: 70px;
+}
+
+#main_content .feature h2 {
+    margin: 20px 0;
+}
+
+#main_content .feature p {
+    padding-left: 20px;
+}
+
+.clear {
+    clear: both;
+}
+
+.go-to-top {
+    width: 48px;
+    height: 48px;
+    position: fixed;
+    bottom: 50px;
+    right: 20px;
+    background: #f2f2f2;
+    display: none;
+}
+
+.go-to-top a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: url( ../images/up.png ) 0 0 no-repeat #f2f2f2;
+    opacity: 0.3;
+}
+
+.go-to-top a:HOVER {
+    opacity: 1;
+}
+
+.team-box {
+    padding: 0 20px;
+}
+
+.copyright {
+    font-size: 14px;
+}
+
+.footer-warp .copyright a {
+    text-decoration: none;
+    color: #007edf;
+}
+
+.copyright a:HOVER {
+    text-decoration: underline;
+}
+
+h1 {
+    font-size: 36px;
+    margin-top: 50px;
+}
+
+h2 {
+    margin-top: 50px;
+    font-size: 26px;
+}

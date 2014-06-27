@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style type="text/css">
+        body, html,#allmap {width: 100%;height: 100%;overflow: hidden;hidden;margin:0;}
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=UlqqXTjNOFT68cSlIo4XIEqx"></script>
+    <title>地图打点</title>
+    <style>
+        /*.BMap_Marker img {*/
+            /*display: none;*/
+        /*}*/
+
+        /*.BMap_Marker div {*/
+            /*margin-top: 9px;*/
+            /*width: 16px!important;*/
+            /*height: 16px!important;*/
+            /*background-image: url(./p.png)!important;*/
+        /*}*/
+    </style>
+</head>
+<body>
+<div id="allmap"></div>
+</body>
+</html>
+<script src="data.js"></script>
+<script type="text/javascript">
+
+    // 百度地图API功能
+    var map = new BMap.Map("allmap");
+    map.centerAndZoom(new BMap.Point(116.404, 39.915), 5);
+    map.enableScrollWheelZoom(); // 允许滚轮缩放
+
+    var marker1 = null;
+
+    pointInfoData.forEach( function ( data, index ) {
+//        if ( index !== 0 ) {
+//            return;
+//        }
+        var icon = new BMap.Icon( "./p.png", new BMap.Size( 16, 16 ) );
+        marker1 = new BMap.Marker(new BMap.Point(data.lng, data.lat), {
+            icon: icon
+        });  // 创建标注
+        map.addOverlay(marker1);
+    } );
+
+//    var marker1 = new BMap.Marker(new BMap.Point(116.384, 39.925));  // 创建标注
+//    map.addOverlay(marker1);              // 将标注添加到地图中
+
+    //创建信息窗口
+//    var infoWindow1 = new BMap.InfoWindow("普通标注");
+//    marker1.addEventListener("click", function(){this.openInfoWindow(infoWindow1);});
+
+
+    //创建小狐狸
+//    var pt = new BMap.Point(116.417, 39.909);
+//    var myIcon = new BMap.Icon("fox.gif", new BMap.Size(300,157));
+//    var marker2 = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
+//    map.addOverlay(marker2);              // 将标注添加到地图中
+//
+//    //让小狐狸说话（创建信息窗口）
+//    var infoWindow2 = new BMap.InfoWindow("<p style='font-size:14px;'>哈哈，你看见我啦！我可不常出现哦！</p><p style='font-size:14px;'>赶快查看源代码，看看我是如何添加上来的！</p>");
+//    marker2.addEventListener("click", function(){this.openInfoWindow(infoWindow2);});
+
+</script>

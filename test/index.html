@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <style type="text/css">
+        @font-face {
+            font-family: "testfont";
+            src: url("a.woff")
+        }
+    </style>
+</head>
+<body>
+<p>
+    背景红色的是p标签，无背景的是svg。在p标签下指定line-height是有效的，
+    但是在svg里指定line-height无效。求解如何才能使svg里的line-height也生效。
+</p>
+<p>
+    在chrome下，p标签由于设置了line-height: 100px;
+    所以高度是100；svg里的text标签同样进行了设置，但是其高度却不是100，而是40（具体值可能会有差异）。
+    请问如何才能让svg里通过类似line-height这种机制，保证其text元素的高度为100?
+</p>
+
+<p style="font-size: 50px; font-family: testfont; line-height: 100px; margin: 0;background: red;">
+    abcd
+</p>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="200" >
+    <text id="abcd" style="font: 50px/100px 'testfont';" x="0" y="50">abcd</text>
+</svg>
+
+</body>
+</html>

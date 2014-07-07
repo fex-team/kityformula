@@ -1,11 +1,7 @@
-seajs.config( {
-    base: "./parser"
-} );
+jQuery( function () {
 
-define( "start", function ( require, exports, module ) {
-
-    var Parser = require( "parser" ).Parser,
-        Assembly = require( "assembly" ),
+    var Parser = kf.Parser,
+        Assembly = kf.Assembly,
         assembly = Assembly.use( document.getElementById( "formulaContainer" ) ),
         input = $( "#latexInput" )[0],
         errorTip = document.getElementById( "errorTip" ),
@@ -13,8 +9,6 @@ define( "start", function ( require, exports, module ) {
         latexStr = "",
         defaultLatexBox = document.getElementById( "defaultLatexBox" ),
         $mathquill = $('#latexView').mathquill( 'editable' );
-
-    require( 'impl/latex/latex' );
 
     latexParser = Parser.use( "latex" );
 
@@ -122,8 +116,4 @@ define( "start", function ( require, exports, module ) {
 //        render();
 //    });
 
-} );
-
-jQuery( function ( $ ) {
-    seajs.use( "start" );
 } );

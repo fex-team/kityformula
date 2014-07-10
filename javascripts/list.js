@@ -19,7 +19,9 @@ function listSetup () {
      */
     function initCharset () {
 
-        var formula = new kf.Formula( "baseCharset" ),
+        var formula = new kf.Formula( "baseCharset", {
+                fontsize: 40
+            } ),
             textExp1 = new kf.TextExpression( "abcdefghijklmnopqrstuvwxyz" ),
             textExp2 = new kf.TextExpression( "ABCDEFGHIJKLMNOPQRSTUVWXYZ" ),
             textExp3 = new kf.TextExpression( "0123456789" );
@@ -35,7 +37,9 @@ function listSetup () {
      */
     function initRomanCharset () {
 
-        var formula = new kf.Formula( "romanCharset" ),
+        var formula = new kf.Formula( "romanCharset", {
+                fontsize: 40
+            } ),
             textExp1 = new kf.TextExpression( "abcdefghijklmnopqrstuvwxyz", "KF AMS ROMAN" ),
             textExp2 = new kf.TextExpression( "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "KF AMS ROMAN" );
 
@@ -49,7 +53,9 @@ function listSetup () {
      */
     function initSymbol () {
 
-        var formula = new kf.Formula( "symbol" ),
+        var formula = new kf.Formula( "symbol", {
+                fontsize: 40
+            } ),
             textExp = new kf.TextExpression( "()-+|/![]:'<>.{}\\infty\\\\to\\" );
 
         formula.appendExpression( textExp );
@@ -61,7 +67,9 @@ function listSetup () {
      */
     function initGreekCharset () {
 
-        var formula = new kf.Formula( "greekCharset" ),
+        var formula = new kf.Formula( "greekCharset" , {
+                fontsize: 40
+            }),
             chars = [ "alpha", "beta", "gamma",
                       "delta", "epsilon", "zeta",
                       "eta", "theta", "iota",

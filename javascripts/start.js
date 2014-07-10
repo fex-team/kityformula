@@ -1,14 +1,10 @@
 /**
  * Created by hn on 14-2-27.
  */
-seajs.config( {
-    base: "./parser"
-} );
+window.onload = function () {
 
-define( "start", function ( require, exports, module ) {
-
-    var Parser = require( "parser" ).Parser,
-        Assembly = require( "assembly" ),
+    var Parser = kf.Parser,
+        Assembly = kf.Assembly,
         assembly = null,
         expressions = [{
             title: "质能方程",
@@ -43,8 +39,6 @@ define( "start", function ( require, exports, module ) {
             ]
         }];
 
-    require( 'impl/latex/latex' );
-
     // 启动其他脚本
     listSetup();
     createTable( expressions );
@@ -55,7 +49,10 @@ define( "start", function ( require, exports, module ) {
     for ( var i = 0, len = expressions.length; i < len; i++ ) {
 
         latexStr = expressions[ i ].latex;
-        assembly = Assembly.use( document.getElementById( "cExp" + i ) );
+        assembly = Assembly.use( document.getElementById( "cExp" + i ) , {
+            fontsize: 25,
+            autoresize: false
+        } );
 
         if ( typeof latexStr === "string" ) {
             assembly.generateBy( latexParser.parse( latexStr ) );
@@ -69,13 +66,7 @@ define( "start", function ( require, exports, module ) {
 
     };
 
-} );
-
-window.addEventListener( "DOMContentLoaded", function () {
-
-    seajs.use( 'start' );
-
-});
+};
 
 function createTable ( exps ) {
 
